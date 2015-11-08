@@ -2,7 +2,7 @@
 import requests
 
 def fun():
-    access_token = '*****' #your acces tokin
+    access_token = '*****' #your acces token
     url = 'https://api.hh.ru/resumes/*****/publish' #your resume id
     response = requests.post(
         url , 
