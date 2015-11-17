@@ -1,3 +1,7 @@
+Usefull:
+    
+http://stackoverflow.com/questions/33024215/built-in-max-heap-api-in-python
+
 import heapq
 
 def _heappush_max(heap, item):
