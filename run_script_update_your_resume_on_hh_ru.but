@@ -3,3 +3,5 @@ cd ..
 cd ..
 cd C:\Python27 #your path (example for Windows)
 python.exe update_your_resume_on_hh.ru.py #your file
+
+#... это следует убрать, а то батник не запускается :-)
