@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# одно из заданий в @mail.ru group
 import csv
 import MySQLdb
 import os
