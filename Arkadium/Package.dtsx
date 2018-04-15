@@ -1,0 +1,762 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/15/2018 4:45:37 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="ROOT-VAIO"
+  DTS:CreatorName="root-VAIO\root"
+  DTS:DTSID="{DBBFDB70-FD6F-4BAE-A11D-4CCA7B958C32}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.7001.0"
+  DTS:LocaleID="1049"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{2B009A48-3DD5-49E2-88A8-FB0545168512}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ROOT-VAIO\SQLEXPRESS.Arkadium]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C5AA86E1-D2EC-4852-946C-9E606DACC88C}"
+      DTS:ObjectName="ROOT-VAIO\SQLEXPRESS.Arkadium">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ROOT-VAIO\SQLEXPRESS;Initial Catalog=Arkadium;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\delete tbl_stage_data"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EEFCA728-19FB-4D83-B7B3-DDB0730794DE}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="delete tbl_stage_data"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5AA86E1-D2EC-4852-946C-9E606DACC88C}"
+          SQLTask:SqlStatementSource="  delete from [Arkadium].[dbo].[tbl_stage_data];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\load flat-files"
+      DTS:CreationName="{5918251B-2970-45A4-AB5F-01C3C588FE5A}"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F6D1216C-0D38-4CE4-A8F4-D253053EF415}"
+      DTS:ExecutableType="{5918251B-2970-45A4-AB5F-01C3C588FE5A}"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="load flat-files">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\load flat-files\Load flat-file"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1049"
+              name="Load flat-file"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load flat-files\Load flat-file.Connections[FlatFileConnection]"
+                  connectionManagerID="{CCF9B964-5E86-4F39-8CA3-85E0A1F41E7D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Round name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Round name]"
+                      length="50"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Round name]"
+                      name="Round name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Boxer name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Boxer name]"
+                      length="50"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Boxer name]"
+                      name="Boxer name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Country]"
+                      length="50"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Result]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Result]"
+                      length="50"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Result]"
+                      name="Result"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Round name]"
+                      codePage="1251"
+                      dataType="text"
+                      name="Round name" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Boxer name]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Boxer name" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Country]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].ExternalColumns[Result]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Result" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1251"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\load flat-files\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tbl_stage_data]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load flat-files\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ROOT-VAIO\SQLEXPRESS.Arkadium]"
+                  connectionManagerRefId="Package.ConnectionManagers[ROOT-VAIO\SQLEXPRESS.Arkadium]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Result]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Result"
+                      externalMetadataColumnId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[result]"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Result]" />
+                    <inputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_name]"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Boxer name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Boxer name"
+                      externalMetadataColumnId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[boxer_name]"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Boxer name]" />
+                    <inputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Round name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Round name"
+                      externalMetadataColumnId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[round_name]"
+                      lineageId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output].Columns[Round name]"
+                      name="Round name" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[round_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="round_name" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[boxer_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="boxer_name" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="country_name" />
+                    <externalMetadataColumn
+                      refId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[result]"
+                      dataType="wstr"
+                      length="50"
+                      name="result" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\load flat-files\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load flat-files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load flat-files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load flat-files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\load flat-files.Paths[Flat File Source Output]"
+              endId="Package\load flat-files\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\load flat-files\Load flat-file.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\update tbl_country"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C21C5256-75E2-4BFE-8B78-1D6426714DDC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="update tbl_country"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5AA86E1-D2EC-4852-946C-9E606DACC88C}"
+          SQLTask:SqlStatementSource=" delete from  [Arkadium].[dbo].[tbl_country];&#xA;&#xA; insert into [Arkadium].[dbo].[tbl_country] (country_id,country_name)&#xA;   select ROW_NUMBER() OVER(ORDER BY sub.country_name asc) rw &#xA;        , sub.country_name&#xA;     from ( select distinct country_name as country_name&#xA;             from [Arkadium].[dbo].[tbl_stage_data] ) as sub;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\update tbl_main"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{778294BE-0D24-4081-BC41-37870269DF1F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="update tbl_main"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5AA86E1-D2EC-4852-946C-9E606DACC88C}"
+          SQLTask:SqlStatementSource="delete from [Arkadium].[dbo].[tbl_main];&#xA;&#xA;insert into [Arkadium].[dbo].[tbl_main] (boxer_name,result,round_id,country_id) &#xA;select cast(replace(st.boxer_name,'В','') as nvarchar(50))&#xA;     , cast(st.result as nvarchar(5))&#xA;&#x9; , cast(r.round_id as int)&#xA;&#x9; , cast(c.country_id as int)&#xA;  from [Arkadium].[dbo].[tbl_stage_data] st&#xA;  left join [Arkadium].[dbo].[tbl_round] r on r.round_name = st.round_name&#xA;  left join [Arkadium].[dbo].[tbl_country] c on c.country_name = st.country_name;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\update tbl_round"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D6EFA4F4-D7B6-4F69-96F8-7B88F8116139}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="update tbl_round"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5AA86E1-D2EC-4852-946C-9E606DACC88C}"
+          SQLTask:SqlStatementSource="delete from  [Arkadium].[dbo].[tbl_round];&#xA;&#xA; insert into [Arkadium].[dbo].[tbl_round] (round_id,round_name)&#xA;   select ROW_NUMBER() OVER(ORDER BY sub.round_name asc) rw &#xA;        , sub.round_name&#xA;     from ( select distinct round_name as round_name&#xA;             from [Arkadium].[dbo].[tbl_stage_data] ) as sub;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{01E187CF-2E15-4D63-AF95-8DFBD9843F2E}"
+      DTS:From="Package\load flat-files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\update tbl_country" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C6BBBEF5-4E19-481F-8349-A9DD63C28A7F}"
+      DTS:From="Package\load flat-files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\update tbl_round" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{1B40E099-FBC1-4C1F-9919-70A0867F0A95}"
+      DTS:From="Package\update tbl_country"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\update tbl_main" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{8401EB15-81C5-45BA-92DC-961A235917ED}"
+      DTS:From="Package\update tbl_round"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\update tbl_main" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{DE5077A3-6B86-484F-9D66-E866CDCF12F7}"
+      DTS:From="Package\delete tbl_stage_data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\load flat-files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="142,42"
+          Id="Package\load flat-files"
+          TopLeft="290.5,104.5" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\update tbl_country"
+          TopLeft="109,178" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\update tbl_round"
+          TopLeft="465,179" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="339.166666666667,146.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-145.166666666667,31.5"
+              Start="0,0"
+              End="-145.166666666667,24">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.81058495821727" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.81058495821727"
+                    Point2="0,12.8105849582173"
+                    Point3="-4,12.8105849582173" />
+                  <mssgle:LineSegment
+                    End="-141.166666666667,12.8105849582173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-141.166666666667,12.8105849582173"
+                    Point2="-145.166666666667,12.8105849582173"
+                    Point3="-145.166666666667,16.8105849582173" />
+                  <mssgle:LineSegment
+                    End="-145.166666666667,24" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="383.833333333333,146.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="162.166666666667,32.5"
+              Start="0,0"
+              End="162.166666666667,25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.21727019498608" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.21727019498608"
+                    Point2="0,13.2172701949861"
+                    Point3="4,13.2172701949861" />
+                  <mssgle:LineSegment
+                    End="158.166666666667,13.2172701949861" />
+                  <mssgle:CubicBezierSegment
+                    Point1="158.166666666667,13.2172701949861"
+                    Point2="162.166666666667,13.2172701949861"
+                    Point3="162.166666666667,17.2172701949861" />
+                  <mssgle:LineSegment
+                    End="162.166666666667,25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158,42"
+          Id="Package\update tbl_main"
+          TopLeft="295,301" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="194,220">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="155,81"
+              Start="0,0"
+              End="155,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.1127819548872" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.1127819548872"
+                    Point2="0,48.1127819548872"
+                    Point3="4,48.1127819548872" />
+                  <mssgle:LineSegment
+                    End="151,48.1127819548872" />
+                  <mssgle:CubicBezierSegment
+                    Point1="151,48.1127819548872"
+                    Point2="155,48.1127819548872"
+                    Point3="155,52.1127819548872" />
+                  <mssgle:LineSegment
+                    End="155,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text=""
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="31,60"
+          Id="a80ca1be-2715-4bac-a19a-a0da553b57d8"
+          TopLeft="599,467" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\delete tbl_stage_data"
+          TopLeft="274,9" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="546,221">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-147,80"
+              Start="0,0"
+              End="-147,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5187969924812" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.5187969924812"
+                    Point2="0,47.5187969924812"
+                    Point3="-4,47.5187969924812" />
+                  <mssgle:LineSegment
+                    End="-143,47.5187969924812" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-143,47.5187969924812"
+                    Point2="-147,47.5187969924812"
+                    Point3="-147,51.5187969924812" />
+                  <mssgle:LineSegment
+                    End="-147,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="363.5,51">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.5"
+              Start="0,0"
+              End="0,46">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text=""
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="44,42"
+          Id="522e2825-c811-449d-87fd-03525ed591b2"
+          TopLeft="460,318" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\load flat-files">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42"
+          Id="Package\load flat-files\Load flat-file"
+          TopLeft="144,66" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\load flat-files\OLE DB Destination"
+          TopLeft="233,180" />
+        <EdgeLayout
+          Id="Package\load flat-files.Paths[Flat File Source Output]"
+          TopLeft="214,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="105.5,72"
+              Start="0,0"
+              End="105.5,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32"
+                    Point2="0,36"
+                    Point3="4,36" />
+                  <mssgle:LineSegment
+                    End="101.5,36" />
+                  <mssgle:CubicBezierSegment
+                    Point1="101.5,36"
+                    Point2="105.5,36"
+                    Point3="105.5,40" />
+                  <mssgle:LineSegment
+                    End="105.5,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\load flat-files\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
