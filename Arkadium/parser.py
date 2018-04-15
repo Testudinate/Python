@@ -85,6 +85,7 @@ def parse(html):
         k = 0 #обнуление параметра k 
         k1 = 0 #обнуление параметра k1
     f = open('c:\\Arkadium\\result.csv', 'a', encoding='utf-8')
+    f.write(str('Round name;Boxer name;Country;Result')+'\n')
     for index in range(0,len(lis)):#а - параметр позволяет не создавать каждый раз файл, если он есть уже по указанному пути; дозапись данных
        f.write(str(lis[index])+'\n')
     f.close()
