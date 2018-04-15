@@ -1,7 +1,7 @@
 USE [Arkadium]
 GO
 
-/****** Object:  Table [dbo].[tbl_main]    Script Date: 15.04.2018 22:15:09 ******/
+/****** Object:  Table [dbo].[tbl_main]    Script Date: 16.04.2018 2:19:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,8 +9,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[tbl_main](
-	[boxer_name] [varchar](16) NOT NULL,
-	[result] [varchar](5) NULL,
+	[boxer_name] [nvarchar](32) NOT NULL,
+	[result] [nvarchar](5) NULL,
 	[country_id] [int] NOT NULL,
 	[round_id] [int] NULL
 ) ON [PRIMARY]
